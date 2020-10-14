@@ -1,5 +1,7 @@
 #include <stdio.h>
+
 int main(){
+
     int elementos_maximos = 100;
     int serie[elementos_maximos];
     int indice;
@@ -17,6 +19,7 @@ int main(){
     printf("\nSumatoria %d", sumatoria);
     int total_calculado = (elementos_maximos*(elementos_maximos+1)*(2*elementos_maximos+1))/6;
     printf("\nTotal calculado %d", total_calculado);
+    
     return 0;
     
 }
