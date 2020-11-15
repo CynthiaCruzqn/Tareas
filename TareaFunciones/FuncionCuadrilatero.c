@@ -9,7 +9,7 @@
 
    };
 
-   int funcion_impresion_de_cuadrilatero(struct cuadrilatero){
+   int funcion_impresion_de_cuadrilatero(struct cuadrilatero c){
      int i, j, base, altura;
 
      for (i = 0; i < altura; i++)
@@ -33,14 +33,14 @@
 int main(){
 
    struct cuadrilatero cuadrilatero1;
-    int i, j;
+    int base, altura;
 
    printf("Ingrese la base: \n");
    scanf("%d", &base);
    printf("Ingrese altura: ");
    scanf("%d", &altura);
 
-   funcion_impresion_de_cuadrilatero(&largo, &altura);
+   funcion_impresion_de_cuadrilatero(struct cuadrilatero c);
 
   return 0;
   system("pause");
