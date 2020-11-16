@@ -16,7 +16,7 @@ int main (int contador, char **contador_cache){
   for(i = 1; i < contador; i++){
     numero = atoi(contador_cache[i]);
     resultado = funcion_factorial(numero);
-    printf("\nEl factorial del numero %d es: %d\n", numero);
+    printf("\nEl factorial del numero %d es: %d\n", numero, resultado);
   }
   return 0;
 }
