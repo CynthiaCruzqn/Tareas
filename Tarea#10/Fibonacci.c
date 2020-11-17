@@ -10,15 +10,15 @@ int funcion_fibonacci(int n){
   }
 }
 
-int main (){
-
+int main (int argc, char **argv){
     int valor = 0;
+    int i = 0;
 
-    do{
-            printf("Ingrese el numero a evaluar: ");
-            scanf("%d", &valor);
-    }while (valor > 40 || valor < 1);
+    for (i = 1; i < argc; i ++){  
+            valor = atoi(argv[i]);
+            printf("El numero %d\t recive el valor %d en Fibonacci", valor, funcion_fibonacci(valor));
+    }
+    printf("\n");
 
-    printf("El numero %d\t recive el valor %d en Fibonacci", valor, funcion_fibonacci(valor));
   return 0;
 }
