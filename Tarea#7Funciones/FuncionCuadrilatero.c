@@ -1,48 +1,55 @@
 #include <stdio.h>
-#include<conio.h>
-#include<string.h>
+#include <stdlib.h>
 
-  struct cuadrilatero{
+typedef struct{
 
-     int base;
-     int altura;
+        int base;
+        int altura;
 
-   };
+} cuadrilatero;
 
-   int funcion_impresion_de_cuadrilatero(struct cuadrilatero c){
-     int i, j, base, altura;
+int funcion_impresion_de_cuadrilatero (cuadrilatero *, int *);
+void funcion_lectura(cuadrilatero *, int *);
 
-     for (i = 0; i < altura; i++)
-     {  for (j = 0; j < base; j++)
-        {  if (i == 0 || i == altura - 1){
-             if (j == 0 || j == base - 1){
-               printf("+");
-             } else { printf("-"); }
-        } else {
-              if (j == 0 || j == base - 1){
-                printf("|");
-              } else { printf(" "); }
+int main (){
+
+        cuadrilatero array[50];
+        int contador = 0;
+
+        for( contador = 0; contador < 2; contador ++){
+                funcion_lectura(array, &contador);
         }
+        for (contador = 0; contador < 2; contador ++){
+                funcion_impresion_de_cuadrilatero (array, &contador);
         }
-        printf("\n" );
-     }
 
+}
+
+int funcion_impresion_de_cuadrilatero (cuadrilatero A[], int * contador){
+ 
+  int i, j;
+  printf("\n\n");
+
+
+  for (i = 0; i < A[*contador].altura; i++)
+   {  for (j = 0; j < A[*contador].base; j++)
+      {  if (i == 0 || i == A[*contador].altura - 1){
+           if (j == 0 || j == A[*contador].base - 1){
+             printf("+");
+           } else { printf("-"); }
+      } else {
+            if (j == 0 || j == A[*contador].base - 1){
+              printf("|");
+            } else { printf(" "); }
+      }
+      }
+      printf("\n" );
    }
+}
 
-
-int main(){
-
-   struct cuadrilatero cuadrilatero1;
-    int base, altura;
-
-   printf("Ingrese la base: \n");
-   scanf("%d", &base);
-   printf("Ingrese altura: ");
-   scanf("%d", &altura);
-
-   funcion_impresion_de_cuadrilatero(struct cuadrilatero c);
-
-  return 0;
-  system("pause");
-
- }
+void funcion_lectura(cuadrilatero A[], int *contador){
+          printf("Ingrese la altura del cuadrilatero %d: ", *contador + 1);
+          scanf("%d", &A[*contador].altura);
+          printf("Ingrese la base del cuadrilatero %d: ", *contador + 1);
+          scanf("%d", &A[*contador].base);
+}
