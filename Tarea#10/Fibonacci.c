@@ -1,20 +1,24 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
- 
+int funcion_fibonacci(int n){
 
-int fibonacci(int numero){
-    if(numero == 0 || numero == 1){
+  if (n == 0 || n == 1){
         return 1;
-    }else{
-        return fibonacci(numero-1) + fibonacci(numero-2);
-    }
+  }else {
+        return funcion_fibonacci(n - 1) + funcion_fibonacci(n - 2);
+  }
 }
-int main(int numero_de_argumentos, char **valores){
-    int posicion_a_calcular = 10;
-    if(numero_de_argumentos > 0){
-        posicion_a_calcular = atoi(valores[1]);
-    }
-    printf("n: %d\n f: %d", posicion_a_calcular, fibonacci(posicion_a_calcular));
-    return 0;
+
+int main (){
+
+    int valor = 0;
+
+    do{
+            printf("Ingrese el numero a evaluar: ");
+            scanf("%d", &valor);
+    }while (valor > 40 || valor < 1);
+
+    printf("El numero %d\t recive el valor %d en Fibonacci", valor, funcion_fibonacci(valor));
+  return 0;
 }
