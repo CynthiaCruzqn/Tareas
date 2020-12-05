@@ -12,6 +12,9 @@ arreglo de esa struct con 3 element
 Ejecutar las operaciones e imprimier el resultado
 */
 
+
+
+
 #include <stdio.h>
 typedef int (*operacion)(int,int);
 
