@@ -1,81 +1,69 @@
-#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-struct Datos{
-	char   matricula_str[10];
-	char  primer_parcial_str[10];
-	char  segundo_parcial_str[10];
-	char  pia_str[10];
-	char  final_str[10];
+struct Calificaciones{
+  char Matricula[10];
+  int Parcial_uno;
+  int Parcial_dos;
+  int PIA;
+  float Final;
 };
 
-void printAllWords(struct Datos punter[], FILE * fp);
-
-int main()
-{
-  FILE *fp;
-
-  if ((fp = fopen("Evaluaciones.csv", "r")) == NULL) {
-      perror("Error opening file");
-      exit(EXIT_FAILURE);
-  }
-
-  struct Datos Datos[50];
-
-  printAllWords(Datos, fp);
-
-  fclose(fp);
-  
-  return EXIT_SUCCESS;
+int total_renglones(FILE *fpcp){
+  int comparacion, contador = 0;
+	int i = 0;
+  char A[200];
+	char B[200];
+  fgets(B,200,fpcp);
+  do{
+    fgets(A,200,fpcp);
+    comparacion = strcmp(A,B);
+    contador++;
+    strcpy(B,A);
+    i++;
+  }while(comparacion != 0);
+  return contador;
 }
 
-void printAllWords(struct Datos punter[], FILE * fp)
-{
-    char tmp[20];
-    int i = 0;
-    int count = 0;
-    int bandera = 1;
-    while (fscanf(fp, "%s ", tmp) != EOF) {
-        if(i >= 9){
-        	
-        	switch(bandera){
-        		case 1: 
-        				//fscanf(fp, "%[^,]", tmp);
-        				//atoi(tmp);
-						strcpy(punter[count].matricula_str, tmp);
-						bandera = 2;
-						printf("Matricula: %s\n", punter[count].matricula_str);
-						break;
-				case 2:
-						//atoi(tmp);
-						strcpy(punter[count].primer_parcial_str, tmp);
-						bandera = 3;
-						printf("Parcial 1: %s\n", punter[count].primer_parcial_str);
-						break;
-				case 3:
-						//atoi(tmp);
-						strcpy(punter[count].segundo_parcial_str, tmp);
-						bandera = 4;
-						printf("parcial 2: %s\n", punter[count].segundo_parcial_str);
-						break;
-				case 4: 
-						//atoi(tmp);
-						strcpy(punter[count].pia_str, tmp);
-						bandera = 5;
-						printf("PIA: %s\n", punter[count].pia_str);
-						break;
-				case 5:
-						//stof(tmp);
-						strcpy(punter[count].final_str, tmp);
-						bandera = 1;
-						printf("Calificacion final: %s\n", punter[count].final_str);
-						break;
-			}
-        }
+void funcion_lectura_encabezados(FILE *fpcpy2){
+  char Encabezado[200];
+  fgets(Encabezado,200,fpcpy2);
+  printf("%s",Encabezado);
+}
 
-        count = count + 1;
-        i++;
+void funcion_lectura_de_datos(FILE *fpcpy3, struct Calificaciones *tupla2){
+  char Mat[10];
+  int Primer_Parcial, Segundo_Parcial, Pia;
+  float calif_final;
+  fscanf(fpcpy3,"%[^,], %d, %d, %d, %f\n", Mat,&Primer_Parcial,&Segundo_Parcial,&Pia,&calif_final);
+  strcpy(tupla2->Matricula,Mat);
+  tupla2->Parcial_uno = Primer_Parcial;
+  tupla2->Parcial_dos = Segundo_Parcial;
+  tupla2->PIA = Pia;
+  tupla2->Final = calif_final;
+}
+
+void funcion_impresion(struct Calificaciones *tupla3){
+  printf("%s %d %d %d %.2f\n",tupla3->Matricula, tupla3->Parcial_uno, tupla3->Parcial_dos, tupla3->PIA, tupla3->Final);
+}
+
+int main(){
+  FILE *fp;
+  int renglones;
+  fp = fopen("Calificaciones.csv","r+");
+  renglones = total_renglones(fp);
+  struct Calificaciones Calif[renglones - 1];
+  rewind(fp);
+  int i = 0;
+  for(i = 0; i < renglones; i++){
+    if(i == 0){
+      funcion_lectura_encabezados(fp);
+    }else{
+      funcion_lectura_de_datos(fp,&Calif[i - 1]);
+      funcion_impresion(&Calif[i - 1]);
     }
-    
+  }
+  fclose(fp);
+  return 0;
 }
